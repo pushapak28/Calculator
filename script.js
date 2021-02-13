@@ -42,25 +42,41 @@ function addDecimal() {
 // console.log(inputBtns);
 // Add event listners
 
+// Calculate first and second values deending on operator
+const calculate = {
+    '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+    '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+    '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+    '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+    '%': (firstNumber, secondNumber) => firstNumber % secondNumber,
+    '=': (firstNumber, secondNumber) => secondNumber,
+};
+
+
+
+
 // Operator function
 function useOperator(operator) {
 
     const currentValue = Number(calculatorDisplay.textContent);
     //    prevent multiple operators
     if (operatorValue && awaitingNextValue) {
+        operatorValue = operator;
         return;
     }
     // Assign first value
     if (!firstValue) {
         firstValue = currentValue;
     } else {
-        console.log('current', currentValue);
+        // console.log(firstValue, operatorValue, currentValue);
+        const calculation = calculate[operatorValue](firstValue, currentValue);
+        // console.log('calculation', calculation);
+        calculatorDisplay.textContent = calculation;
+        firstValue = calculation;
     }
     // ready for the next value,store operator
     awaitingNextValue = true;
     operatorValue = operator;
-    console.log('firstValue', firstValue);
-    console.log('operator Value', operator);
 }
 
 
