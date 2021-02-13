@@ -31,10 +31,10 @@ body {
 }
 
 /* calculator display */
-.calculator-body h2 {
+.calculator-body h1 {
     /* color: red; */
     margin: 0;
-    padding: 25px;
+    padding: 20px;
     font-size: 40px;
     font-style: 'Lucida Console',
         sans-serif;
@@ -99,14 +99,14 @@ button:focus {
     font-size: 30px;
 }
 
-.cancel {
+.clear {
     font-size: 40px;
     font-weight: 100;
     background: #e71d36;
     color: white;
 }
 
-.cancel:hover {
+.clear:hover {
     filter: brightness(90%);
 }
 
