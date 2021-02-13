@@ -2,12 +2,21 @@ const calculatorDisplay = document.querySelector('h1');
 const inputBtns = document.querySelectorAll('button');
 const clearBtn = document.getElementById('cancel');
 
+// Calculate first and second values deending on operator
+const calculate = {
+    '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+    '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+    '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+    '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+    '%': (firstNumber, secondNumber) => firstNumber % secondNumber,
+    '=': (firstNumber, secondNumber) => secondNumber,
+};
 // Globally variables
 let firstValue = 0;
 let operatorValue = '';
 let awaitingNextValue = false;
 
-
+// functions
 
 function sendNumberValue(number) {
     // if th ecurrent value is 0 replace it , if not add number
@@ -36,24 +45,10 @@ function addDecimal() {
     }
 }
 
-
 // console.log(clearBtn);
 // console.log(calculatorDisplay);
 // console.log(inputBtns);
 // Add event listners
-
-// Calculate first and second values deending on operator
-const calculate = {
-    '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
-    '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
-    '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
-    '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
-    '%': (firstNumber, secondNumber) => firstNumber % secondNumber,
-    '=': (firstNumber, secondNumber) => secondNumber,
-};
-
-
-
 
 // Operator function
 function useOperator(operator) {
@@ -79,7 +74,15 @@ function useOperator(operator) {
     operatorValue = operator;
 }
 
+// Reset all value Display
+function resetAll() {
+    firstValue = 0;
+    operatorValue = '';
+    awaitingNextValue = false;
+    calculatorDisplay.textContent = '0';
+}
 
+// Event listener
 inputBtns.forEach((inputBtn) => {
     if (inputBtn.classList.length === 0) {
         inputBtn.addEventListener('click', () => sendNumberValue(inputBtn.value));
@@ -89,13 +92,4 @@ inputBtns.forEach((inputBtn) => {
         inputBtn.addEventListener('click', () => addDecimal());
     }
 });
-
-// Reset all value Display
-function resetAll() {
-    firstValue = 0;
-    operatorValue = '';
-    awaitingNextValue = false;
-    calculatorDisplay.textContent = '0';
-}
-// Event listener
 clearBtn.addEventListener('click', resetAll);
